@@ -1,4 +1,5 @@
 let express = require('express');
+var bodyParser = require('body-parser');
 
 let app = express();
 let heroes = require('./heroes.json');
@@ -21,6 +22,14 @@ app.get('/heroes/:slug',(request,response)=>{
     }
     else {response.sendStatus(404)}
 
+});
+
+
+app.use(bodyParser.json())
+
+app.post('/', (request, response) => {
+  var { name } = request.body
+  response.send('<h1>Hello ' + name + '!</h1>');
 });
 
 
